@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns='http://www.springframework.org/schema/beans'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans.xsd'>
+						
+						
+	<bean id='data_bean' class='com.test.beans.DataBean'/>
+	<bean id='obj1' class='com.test.beans.TestBean1' lazy-init="true">
+		
+		<!-- name에 설정되어 있는 이름은 변수의 이름이 아니다.
+		name에 있는 이름보고 set이름 형태의 setter 메서드를
+		찾아 호출하고 value 속성의 값을 넣어준다.
+		
+		data1이면 setData1 메서드를 찾아 호출하게 된다. -->
+		
+		
+		<property name="data1" value='100'/>
+		<property name="data2" value='11.11'/>
+		<property name="data3" value='true'/>
+		<property name="data4" value='안녕하세요'/>
+		<property name="data5">
+			<bean class='com.test.beans.DataBean'/>
+		</property>
+		<property name="data6" ref="data_bean"/>
+	</bean>
+</beans>

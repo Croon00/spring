@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns='http://www.springframework.org/schema/beans'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans.xsd'>
+						
+						
+	<!-- bean을 정의한다. -->
+	<!-- IoC 컨테이너가 생성될 때 객체가 생성되며 bean 사용시 같은 객체를 사용한다. -->
+	<bean id='xml1'	class='com.test.beans.TestBean1'/>
+	
+	<!-- 최초의 getBean 메서드를 호출할 때 객체가 생성된다 -->
+	<!-- 그 이후에는 같은 객체를 반환한다. -->
+	<bean id='xml2' class='com.test.beans.TestBean2' lazy-init='true'/>
+	
+	<!-- getBean 메서드가 호출 될 때마다 새로운 객체를 생성한다 -->
+	<bean id='xml3' class='com.test.beans.TestBean3' scope='prototype'/>
+	
+</beans>

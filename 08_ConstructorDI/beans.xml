@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns='http://www.springframework.org/schema/beans'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans.xsd'>
+						
+	
+	<!-- 생성자 주입에 관련된 내용이 없기 때문에 매개 변수가 없는 -->
+	<!-- 기본 생성자를 찾아 호출한다. -->		
+	<bean id='obj1' class='com.test.beans.TestBean1' lazy-init="true"/>
+	
+	<!-- 매개변수의 개수가 동일한 생성자가 다수 있을 경우 -->
+	<!-- 문자열형 변수를 가지고 있는 생성자가 우선저긍로 선택된다. -->
+	<!-- 문자열, 실수, 정수 순이 된다. -->
+	<!-- 이 때문에 값의 타입ㅈ을 지정해줘야 한다. -->
+	<!-- 정수형 변수가 하나 있는 생성자를 찾아 호출한다. -->
+	<bean id='obj2' class='com.test.beans.TestBean1' lazy-init="true">
+		<constructor-arg value = "100" type="int"/>
+	</bean>
+	
+	<!-- 실수형 변수가 하나 있는 생성자를 찾아 호출한다 -->
+	<bean id='obj3' class='com.test.beans.TestBean1' lazy-init="true">
+		<constructor-arg value= '11.11' type="double"/>
+	</bean>
+	
+	<bean id='obj4' class='com.test.beans.TestBean1' lazy-init="true">
+		<constructor-arg value= '안녕하세요' type='java.lang.String'/>
+	</bean>
+	
+	<!-- 매개변수가 3개인 생성자를 찾아 호출한다. -->
+	<!-- 주입될 값을 설정할 때 매개변수의 순서와 일치하게 작성한다 -->
+	<bean id='obj5' class='com.test.beans.TestBean1' lazy-init="true">
+		<constructor-arg value = "100" type="int"/>
+		<constructor-arg value = "11.11" type="double"/>
+		<constructor-arg value = "안녕하세요" type="java.lang.String"/>
+	</bean>
+	
+	<!-- 스프링은 매개변수의 순서와 일치하지 않아도 상관없다 -->
+	<!-- 단, 지정된 값이 어떤 변수에 들어가야 하는지를 설정해야 한다. -->
+	<bean id='obj6' class="com.test.beans.TestBean1" lazy-init="true">
+		<!-- name에 설정된 변수이름으로 보고 그 변수에 값을 주입해준다. -->
+		<constructor-arg name="data2" value="11.11"/>
+		<constructor-arg name="data3" value="안녕하세요"/>
+		<constructor-arg name="data1" value="100"/>
+	</bean>
+	
+	<bean id='obj7' class="com.test.beans.TestBean1" lazy-init="true">
+		<!-- index에 설정된 순서를 보고 그 변수에 값을 주입해준다. -->
+		<constructor-arg index='1' value="11.11"/>
+		<constructor-arg index='2' value="안녕하세요"/>
+		<constructor-arg index='0' value="100"/>
+	</bean>
+	
+	<!-- 객체 주입 -->
+	<!-- 주입 설정시 주입될 bean을 정의한다. -->
+	<bean id='obj8' class='com.test.beans.TestBean2' lazy-init="true">
+		<constructor-arg>
+			<bean class='com.test.beans.DataBean'/>
+		</constructor-arg>
+		<constructor-arg>
+			<bean class='com.test.beans.DataBean'/>
+		</constructor-arg>
+	</bean>
+	
+	<!-- 미리 정의 되어있는 bean을 주입한다. -->
+	<bean id='data_bean' class='com.test.beans.DataBean' scope='prototype'/>
+	
+	<bean id='obj9' class='com.test.beans.TestBean2' lazy-init="true">
+		<!-- ref에 정의되어 있는 bean의 id를 설정한다. -->
+		<constructor-arg ref='data_bean'/>
+		<constructor-arg ref='data_bean'/>
+	</bean>
+</beans>

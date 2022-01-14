@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns='http://www.springframework.org/schema/beans'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans.xsd'
+	default-init-method="default_init"
+	default-destroy-method="default_destroy">
+						
+	<!-- init-method : 생성자 수행 이후에 자동으로 호출되는 메서드 -->
+	<!-- destroy-method : 객체가 소멸되기 직전에 자동으로 호출되는 메서드 -->
+	<bean id='t1' class='com.test.beans.TestBean1' lazy-init="true" 
+		  init-method="bean1_init" destroy-method="bean1_destroy"/>
+		  					
+	<!-- 이 bean은 init-method와 destroy-method가 설정되어 있지 않는다 -->
+	<!-- 이때 beans 태그에 설정되어 있는 default-init-method와 default-destroy-method가 -->
+	<!-- 설정되어 있는지 확인하고 설정되어 있다면 설정된 메서드가 bean에 있을 때 그 메서드를 자동으로 -->
+	<!-- 호출한다. bean에 해당 메서드가 없다면 아무일도 발생하지 않는다. -->
+	<bean id='t2' class='com.test.beans.TestBean2' lazy-init="true" />
+	
+	
+	<!-- init-method와 destroy-method를 설정할 경우 -->
+	<!-- default-init-method와 default-destroy-method에 설정된 메서드가 있다면 -->
+	<!-- default 메서드들은 다 무시되고 bean에 설정된 메서드가 호출된다. -->
+	<bean id='t3' class='com.test.beans.TestBean3' lazy-init="true"
+		  init-method="bean3_init" destroy-method="bean3_destroy" />
+	
+	<!-- default-init-method와 default-destroy-method에 설정된 메서드가 없다면 -->
+	<!-- 아무일도 발생하지 않는다 -->
+	<bean id='t4' class='com.test.beans.TestBean4' lazy-init="true"/>
+	
+	<!-- init-method와 destroy-method에 설정된 메서드가 존재하지 않으면 -->
+	<!-- 오류가 발생한다. -->
+	<bean id='t5' class='com.test.beans.TestBean4' lazy-init="true"
+		  init-method="bean4_init" destroy-method="bean4_destroy" />
+</beans>

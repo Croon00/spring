@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy package &apos;com.test.beans&apos; to &apos;03_SpringBasic/src/main/java&apos;&#x0D;&#x0A;- Original project: &apos;02_Polymorphism&apos;&#x0D;&#x0A;- Destination element: &apos;03_SpringBasic/src/main/java&apos;&#x0D;&#x0A;- Original element: &apos;02_Polymorphism/src/com.test.beans&apos;" description="Copy package" destination="=03_SpringBasic/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/" element1="/src&lt;com.test.beans" flags="589830" fragments="1" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyPackages" stamp="1626678499281" version="1.0"/>
+</session>

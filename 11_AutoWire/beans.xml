@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns='http://www.springframework.org/schema/beans'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans.xsd'
+						
+	default-autowire="byName">
+	<!-- default autowire : 자동 주입이 설절되어 있지 않을 경우 설정할 기본 자동 주입 방법 -->
+							
+	<!-- ByName : 이름을 통한 주입 -->
+	
+	<!-- 자동주입을 적용하지 않은 예 -->
+	<bean id='data_bean1' class='com.test.beans.DataBean1' scope='prototype'/>
+	
+	<bean id='obj1' class='com.test.beans.TestBean1'>
+		<property name="data1" ref='data_bean1'/>
+		<property name="data2" ref='data_bean1'/>
+	</bean>
+	
+	<!-- 자동주입을 적용한 예 -->
+	<bean id='data1' class='com.test.beans.DataBean1'/>
+	<bean id='data2' class='com.test.beans.DataBean1'/>
+	
+	<!-- autowire에 byName으로 설정하였기 때문에 TestBean1에 있는 -->
+	<!-- 변수의 이름을 보고 주입을 하게 된다. -->
+	<!-- TeestBean1에는 data1과 data2 라는 변수가 정의되어 있으므로 -->
+	<!-- id가 data1, data2인 bean을 찾아 주입해준다. -->
+	<!-- 만약 변수의 이름과 동일한 id의 bean이 없다면 주입이 발생하지 않는다. -->
+	<bean id='obj2' class='com.test.beans.TestBean1' autowire="byName"/>
+	
+	<!-- _____________________________________________________________ -->
+	
+	<!-- Bytype : 클래스 타입을 보고 주입한다. -->
+	
+	<bean id='data_bean2' class='com.test.beans.DataBean2' scope='prototype'/>
+	<!-- 동일 타입의 bean이 2개 이상 존재할 경우 어떠한 bean을 주입할지 -->
+	<!-- 결정할 수 없기 때문에 오류가 발생하게된다. -->
+	<!--  
+	<bean class='com.test.beans.DataBean2' scope='prototype'/>
+	-->
+	<!-- 정의되어 있는 변수의 클래스타입을 확인하여 같은 타입으로 정의되어 있는 -->
+	<!-- bean을 찾아 주입한다. -->
+	<bean id='obj3' class='com.test.beans.TestBean2' autowire="byType"/>
+						
+	<!-- _____________________________________________________________ -->
+
+	<!-- constructor : 생성자를 통한 자동 주입 -->
+	
+	<!-- 자동 주입을 사용하지 않은 예 -->
+	
+	<bean id='obj5' class='com.test.beans.TestBean3'>
+		<constructor-arg value='100' type='int'/>
+		<constructor-arg value='문자열'/>
+		<constructor-arg ref='data_bean2'/>
+		<constructor-arg ref='data_bean2'/>
+	</bean>
+	
+	<!-- 자동 주입을 사용한 예 -->
+	<bean id='obj6' class='com.test.beans.TestBean3' autowire='constructor'>
+		<!-- 자동 주입되지 않는 애들은 따로 설정한다. -->
+		<constructor-arg value='100' type='int' index='0'/>
+		<constructor-arg value='문자열' index='1'/>
+		
+	</bean>
+	
+	<!-- autowire를 설정하지 않았기 때문에 상단에 설정한 기본 자동 주입을 따른다. -->
+	<bean id='obj7' class='com.test.beans.TestBean1'/>
+	
+	<!-- 상단에 기본 자동 주입 방식이 설정되어 있을 경우 자동주입을 설정하지 않은 -->
+	<!-- bean들은 모두 기본 자동 주입 방식으 따르게 된다. -->
+	<!-- 하지만 기본 자동 주입방식을 따르고 싶지 않을 경우 autowire에 no를 설정한다. -->
+	<bean id='obj8' class='com.test.beans.TestBean1' autowire='no'/>
+	
+	
+</beans>

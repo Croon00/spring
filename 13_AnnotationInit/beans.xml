@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns='http://www.springframework.org/schema/beans'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans.xsd'>
+						
+	<!-- init-method : 생성자 호출 이후 자동으로 호출될 메서드 -->
+	<!-- destroy-method : 객체 소멸 직전에 자동으로 호출될 메서드 -->
+	<bean id='xml1' class='com.test.beans.TestBean' lazy-init="true"
+		  init-method='testInit' destroy-method='testDestroy'/>
+		  
+		  				
+</beans>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns='http://www.springframework.org/schema/beans'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans.xsd'>
+						
+						
+	<!-- IoC 컨테이너가 생성될 때 자동으로 객체가 생성된다. -->
+	<!-- id가 없기 때문에 id를 통한 추출은 불가능하다. -->
+	<!-- class 타입으로만 추출이 가능하며 통일 타입의 bean이 또 정의 되어있으면 문제가 발생한다. -->	
+	<bean class='com.test.beans.TestBean'/>		
+	
+	<!-- IoC 컨테이너가 생성될 때 자동으로 객체가 생성된다 -->
+	<!-- 동일타입의 bean을 다수 정의할 경우 각각을 구분하기 위해 -->
+	<!-- id를 부여해준다. -->
+	<bean id='t1' class='com.test.beans.TestBean2'></bean>
+	<bean id='t2' class='com.test.beans.TestBean2'></bean>
+	
+	<!-- Lazy-init : true를 설정하면 IoC 컨테이너가 생성될 때 -->
+	<!-- 객체가 생성되지 않는다. -->
+	<!-- 개발자가 getBean 메서드를 호출하여 받아올 때 생성된다. -->
+	<bean id='t3' class='com.test.beans.TestBean3' lazy-init="true"></bean>
+	
+	<!-- scope : 객체의 생성 시점을 설정한다. 생략하면 singlton으로 설정되며 -->
+	<!-- 객체는 하나만 생성된다. prototype을 설정하면 getBean 메서드를 호출할 때 -->
+	<!-- 마다 새로운 객체가 생성된다. -->
+	<bean id='t4' class='com.test.beans.TestBean4' scope="prototype"/>
+	
+</beans>

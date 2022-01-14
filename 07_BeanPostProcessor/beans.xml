@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns='http://www.springframework.org/schema/beans'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans.xsd'>
+						
+	<!-- init-method가 설정되어 있을 경우 init-method가 호출되기 전에 -->
+	<!-- before 메서드가 호출되고 init-method 호출 후에 after 메서드가 호출된다 -->
+	<bean id='t1' class='com.test.beans.TestBean1' lazy-init='true' init-method='bean1_init'/>
+	
+	<!-- init-method를 설정하지 않아도 BeanPosterProcessor에 정의되어 있는 -->
+	<!-- before, after가 순차적으로 호출된다. -->
+	<bean id='t2' class='com.test.beans.TestBean2' lazy-init='true'/>
+	<!-- BeanPostProcessor bean을 정의한다 -->
+	<bean class='com.test.processor.PostProcessor1'/>	
+	<bean class='com.test.processor.PostProcessor2'/>	
+</beans>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns='http://www.springframework.org/schema/beans'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xmlns:context='http://www.springframework.org/schema/context'
+	xsi:schemaLocation='http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/context
+						http://www.springframework.org/schema/context/spring-context.xsd'>
+						
+						
+	<!--등록하는 bean class를 검사하여 어노테이션으로 설정된 -->
+	<!-- 주입 관련된 것을 사용하도록 한다. -->
+	<context:annotation-config/>
+	
+	<!-- bean을 등록한다 -->
+	<bean id='xml1' class='com.test.beans.TestBean1'>
+	<!-- @Required가 설정된 property에 값을 주입한다. -->
+		<property name="data1" value='100'/>
+	</bean>
+	
+	<bean class='com.test.beans.DataBean1'/>
+	
+	<bean id='obj4' class='com.test.beans.DataBean2'/>
+	<bean id='obj5' class='com.test.beans.DataBean2'/>
+</beans>
